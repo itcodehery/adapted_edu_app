@@ -1,3 +1,6 @@
+import 'package:adapted_app/pages/auth_page.dart';
+import 'package:adapted_app/pages/home_page.dart';
+import 'package:adapted_app/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,19 +22,15 @@ class Adapted extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         textTheme: GoogleFonts.dmSansTextTheme(),
+        primaryColor: Colors.amber.shade800,
       ),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'adapted.',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        body: const Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      routes: {
+        '/': (context) => const WelcomePage(),
+        '/welcome': (context) => const WelcomePage(),
+        '/auth': (context) => const AuthPage(),
+        '/home': (context) => const HomePage(),
+      },
     );
   }
 }
