@@ -38,6 +38,11 @@ dependencies:
   supabase_flutter: ^2.6.0
   google_fonts: ^6.2.1
   font_awesome_flutter: ^10.7.0
+  go_router: ^14.2.7
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  riverpod_generator: ^2.4.3
+  build_runner: ^2.4.12
 
 dev_dependencies:
   flutter_test:

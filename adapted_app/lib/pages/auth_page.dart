@@ -1,5 +1,12 @@
+import 'dart:async';
+
+import 'package:adapted_app/constants.dart';
+import 'package:adapted_app/helper/supabase_helper.dart';
+import 'package:adapted_app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -9,6 +16,26 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+  late final StreamSubscription<AuthState> _auth;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+  @override
+  void initState() {
+    super.initState();
+    // listen to auth changes
+    _auth = supabase.auth.onAuthStateChange.listen((event) {
+      final session = event.session;
+      if (session != null) {
+        if (mounted) {
+          Navigator.of(context).pop();
+          // Navigator.of(context).pushReplacementNamed('/home');
+          GoRouter.of(context).go('/home');
+        }
+      }
+    });
+  }
+
   // variables
   final ButtonStyle _loginWithButton = ButtonStyle(
     shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -150,8 +177,7 @@ class _AuthPageState extends State<AuthPage> {
                                           Size(double.infinity, 50))),
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    Navigator.of(context)
-                                        .pushReplacementNamed('/home');
+                                    GoRouter.of(context).go('/home');
                                   },
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -245,17 +271,27 @@ class _AuthPageState extends State<AuthPage> {
                                         Colors.amber.shade800),
                                     minimumSize: const WidgetStatePropertyAll(
                                         Size(double.infinity, 50))),
-                                onPressed: () {},
-                                child: const Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text('Sign Up',
-                                        style: TextStyle(color: Colors.black)),
-                                    SizedBox(width: 10),
-                                    Icon(Icons.arrow_forward_rounded,
-                                        color: Colors.black),
-                                  ],
-                                )),
+                                onPressed: () {
+                                  SupabaseHelper.signInWithEmail(
+                                      emailController.text.trim(),
+                                      passwordController.text.trim());
+                                  setState(() {
+                                    isLoading = true;
+                                  });
+                                },
+                                child: isLoading
+                                    ? const CircularProgressIndicator()
+                                    : const Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text('Sign Up',
+                                              style: TextStyle(
+                                                  color: Colors.black)),
+                                          SizedBox(width: 10),
+                                          Icon(Icons.arrow_forward_rounded,
+                                              color: Colors.black),
+                                        ],
+                                      )),
                             const SizedBox(height: 20),
                             const Text(
                               'By signing up, you are agreeing to our Terms of Service and Privacy Policy',

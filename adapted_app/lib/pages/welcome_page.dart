@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -61,7 +62,8 @@ class WelcomePage extends StatelessWidget {
                     minimumSize: const WidgetStatePropertyAll(
                         Size(double.infinity, 70))),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/auth');
+                  // Navigator.of(context).pushNamed('/auth');
+                  GoRouter.of(context).go('/auth');
                 },
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,

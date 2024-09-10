@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:adapted_app/router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,18 +20,13 @@ class Adapted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerDelegate: router.routerDelegate,
       theme: ThemeData(
         textTheme: GoogleFonts.dmSansTextTheme(),
         primaryColor: Colors.amber.shade800,
       ),
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => const WelcomePage(),
-        '/welcome': (context) => const WelcomePage(),
-        '/auth': (context) => const AuthPage(),
-        '/home': (context) => const HomePage(),
-      },
     );
   }
 }

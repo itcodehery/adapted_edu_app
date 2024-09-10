@@ -1,3 +1,4 @@
+import 'package:adapted_app/helper/supabase_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -23,6 +24,12 @@ class HomePage extends StatelessWidget {
         title: const Text('adapted.',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         centerTitle: true,
+        actions: const [
+          IconButton(
+            icon: Icon(Icons.logout_outlined),
+            onPressed: SupabaseHelper.signOut,
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
