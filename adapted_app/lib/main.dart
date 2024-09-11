@@ -1,6 +1,3 @@
-import 'package:adapted_app/pages/auth_page.dart';
-import 'package:adapted_app/pages/home_page.dart';
-import 'package:adapted_app/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +18,7 @@ class Adapted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: router.routerDelegate,
+      routerConfig: router,
       theme: ThemeData(
         textTheme: GoogleFonts.dmSansTextTheme(),
         primaryColor: Colors.amber.shade800,

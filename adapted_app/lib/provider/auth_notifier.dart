@@ -1,7 +1,6 @@
 import 'package:adapted_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthNotifier extends Notifier<Future<bool>> {
   @override
